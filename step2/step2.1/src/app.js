@@ -11,7 +11,7 @@ const app = express();
 app.use('/api', routes);
 
 app.get('/', (req, res) => {
-  res.send('Hello world');
+  res.send('<a href="/api/docs">Click here</a>');
 });
 
 // Server run
