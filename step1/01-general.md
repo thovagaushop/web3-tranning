@@ -36,9 +36,12 @@
 9. Explain the concepts of "native token".
    - Native tokens are the foundational tokens of a cryptocurrency blockchain designed to function directly with the blockchain
 10. Explain the concepts of "ERC-20", "ERC-1155" and "ERC-721". There is no need for an answer, but you should get a deep understanding of "ERC-20".
+    ERC-20:
+
     - ERC-20 is "Ethereum Request for Comment 20", this is a technical standard for creation of other token for other apps, services or products using the Ethereum BlockChain
     - ERC-20 is same like a interface which have a list of functions and events that must be implemented into a token.
     - There are some required functions and some optional functions of ERC-20
+
       - Required:
 
         - TotalSupply : The total number of tokens that will ever be issued
@@ -52,6 +55,38 @@
         - Name: Token's name
         - Symbol: Token's symbol
         - Decimals: Decimal points to use
+
+    ERC-721:
+
+    - Unlike ERC-20, which is used for fungible token, ERC-721 is a technical standard for non-fungible token (NFT), each NTF have a unique called TokenId
+      There are some function and event of ERC-721:
+      - Required:
+        - balanceOf
+        - ownerOf
+        - safeTransferFrom: check if the address receiving the token is an ERC-721 receiver or not. The goal is to ensure that your NFT does not get locked up in an address from which you can never retrieve it.
+        - transferFrom
+        - approve
+        - getApproved: return address public - Gets the approved address for a token ID, or zero if no address set Reverts if the token ID does not exist
+        - setApprovalForAll
+        - isApprovedForAll: return boolean - Tells whether an operator is approved by a given owner
+        - Transfer Event
+        - Approval Event
+        - ApprovalForAll Event
+
+    ERC-1155:
+
+    - ERC-1155 is a technical standard which have management multip token follow other multip standard: fungible or non - fungible
+      Functions and events of ERC-1155:
+      - Required:
+        - safeTransferFrom
+        - safeBatchTransferFrom: similar to the standard ERC-20 TransferFrom function, but instead of a single value and id, here we pass an array of values and an array of corresponding ids, which is exactly what allows us to transfer multiple crypto assets in a single call
+        - balanceOf
+        - balanceOfBatch: querying multiple balances and transferring multiple tokens simpler and less gas-intensive
+        - setApprovalForAll
+        - TransferSingle Event
+        - TransferBatch Event
+        - URI
+
 11. What is a RPC endpoint?
     - RPC endpoint access is a way for blockchain applications and wallets to interact with the blockchain
 12. What is an ABI?
