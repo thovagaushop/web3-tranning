@@ -36,6 +36,22 @@
 9. Explain the concepts of "native token".
    - Native tokens are the foundational tokens of a cryptocurrency blockchain designed to function directly with the blockchain
 10. Explain the concepts of "ERC-20", "ERC-1155" and "ERC-721". There is no need for an answer, but you should get a deep understanding of "ERC-20".
+    - ERC-20 is "Ethereum Request for Comment 20", this is a technical standard for creation of other token for other apps, services or products using the Ethereum BlockChain
+    - ERC-20 is same like a interface which have a list of functions and events that must be implemented into a token.
+    - There are some required functions and some optional functions of ERC-20
+      - Required:
+
+        - TotalSupply : The total number of tokens that will ever be issued
+        - BalanceOf: The account balance of a token owner's account
+        - Transfer: Automatically executes transfers of a specified number of tokens to a specified address for transactions using the token
+        - TransferFrom: Automatically executes transfers of a specified number of tokens from a specified address using the token
+        - Approve: Allows a spender to withdraw a set number of tokens from a specified account, up to a specific amount
+        - Allowance: Returns a set number of tokens from a spender to the owner
+
+      - Optional:
+        - Name: Token's name
+        - Symbol: Token's symbol
+        - Decimals: Decimal points to use
 11. What is a RPC endpoint?
     - RPC endpoint access is a way for blockchain applications and wallets to interact with the blockchain
 12. What is an ABI?
