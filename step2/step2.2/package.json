@@ -1,0 +1,27 @@
+{
+  "name": "step2.2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "test": "./bin/index"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\"&& exit 1",
+    "link": "npm link"
+  },
+  "preferGlobal": true,
+  "keywords": [
+    "cli",
+    "test"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "arg": "^5.0.2",
+    "esm": "^3.2.25",
+    "ethers": "^6.7.1",
+    "yargs": "^17.7.2"
+  }
+}
