@@ -2,6 +2,7 @@ import * as readContractService from '../services/readContract.service.js';
 
 export const allowance = async (req, res) => {
   try {
+    console.log(req.params.token);
     const query = {
       type: 'allowance',
       owner: req.query.owner,

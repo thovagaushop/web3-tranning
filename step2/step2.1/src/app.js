@@ -1,5 +1,5 @@
 import express from 'express';
-import envConstant from './constants/env.constant.js';
+import envConstant from './common/constants/env.constant.js';
 import routes from './routes/index.js';
 
 // PORT

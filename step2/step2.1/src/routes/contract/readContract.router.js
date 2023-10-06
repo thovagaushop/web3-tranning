@@ -11,7 +11,7 @@ const router = Router();
 
 /**
  * @swagger
- * /api/contract/read/allowance/{token}:
+ * /api/contract/allowance/{token}:
  *   get:
  *     description: Read data of contract
  *     tags: [Read Contract]
@@ -22,17 +22,23 @@ const router = Router();
  *         description: Token of contract
  *         in: path
  *         required: true
- *         type: string
+ *         schema:
+ *          type: string
+ *          default: null
  *       - name: owner
  *         description: Address of owner
  *         in: query
  *         required: true
- *         type: string
+ *         schema:
+ *          type: string
+ *          default: null
  *       - name: spender
  *         description: Address of spender
  *         in: query
  *         required: true
- *         type: string
+ *         schema:
+ *          type: string
+ *          default: null
  *     responses:
  *       200:
  *         description: Get data success
@@ -43,7 +49,7 @@ router.get('/allowance/:token', readContractController.allowance);
 
 /**
  * @swagger
- * /api/contract/read/balance/{token}:
+ * /api/contract/balance/{token}:
  *   get:
  *     description: Read data of contract
  *     tags: [Read Contract]
@@ -54,12 +60,16 @@ router.get('/allowance/:token', readContractController.allowance);
  *         description: Token of contract
  *         in: path
  *         required: true
- *         type: string
+ *         schema:
+ *          type: string
+ *          default: null
  *       - name: account
  *         description: Account address
  *         in: query
  *         required: true
- *         type: string
+ *         schema:
+ *          type: string
+ *          default: null
  *     responses:
  *       200:
  *         description: Get data success
@@ -70,7 +80,7 @@ router.get('/balance/:token', readContractController.balance);
 
 /**
  * @swagger
- * /api/contract/read/decimals/{token}:
+ * /api/contract/decimals/{token}:
  *   get:
  *     description: Read data of contract
  *     tags: [Read Contract]
@@ -81,7 +91,9 @@ router.get('/balance/:token', readContractController.balance);
  *         description: Token of contract
  *         in: path
  *         required: true
- *         type: string
+ *         schema:
+ *          type: string
+ *          default: null
  *     responses:
  *       200:
  *         description: Get data success
@@ -92,7 +104,7 @@ router.get('/decimals/:token', readContractController.decimals);
 
 /**
  * @swagger
- * /api/contract/read/name/{token}:
+ * /api/contract/name/{token}:
  *   get:
  *     description: Read data of contract
  *     tags: [Read Contract]
@@ -103,7 +115,9 @@ router.get('/decimals/:token', readContractController.decimals);
  *         description: Token of contract
  *         in: path
  *         required: true
- *         type: string
+ *         schema:
+ *          type: string
+ *          default: null
  *     responses:
  *       200:
  *         description: Get data success
@@ -114,7 +128,7 @@ router.get('/name/:token', readContractController.name);
 
 /**
  * @swagger
- * /api/contract/read/symbol/{token}:
+ * /api/contract/symbol/{token}:
  *   get:
  *     description: Read data of contract
  *     tags: [Read Contract]
@@ -125,7 +139,9 @@ router.get('/name/:token', readContractController.name);
  *         description: Token of contract
  *         in: path
  *         required: true
- *         type: string
+ *         schema:
+ *          type: string
+ *          default: null
  *     responses:
  *       200:
  *         description: Get data success
@@ -136,7 +152,7 @@ router.get('/symbol/:token', readContractController.symbol);
 
 /**
  * @swagger
- * /api/contract/read/totalSupply/{token}:
+ * /api/contract/totalSupply/{token}:
  *   get:
  *     description: Read data of contract
  *     tags: [Read Contract]
@@ -147,7 +163,9 @@ router.get('/symbol/:token', readContractController.symbol);
  *         description: Token of contract
  *         in: path
  *         required: true
- *         type: string
+ *         schema:
+ *          type: string
+ *          default: null
  *     responses:
  *       200:
  *         description: Get data success

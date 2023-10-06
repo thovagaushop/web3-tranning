@@ -1,18 +1,24 @@
-import { getContract } from '../common/contracts/getContract.js';
-import envContant from '../constants/env.constant.js';
+import { getContract } from '../utils/contracts/getContract.js';
+import envContant from '../common/constants/env.constant.js';
+import { ValidationError } from '../common/exceptions/custom.exception.js';
+import validateListFieldRequired from '../utils/validation/validateFieldRequired.js';
+import validateListToken from '../utils/validation/validateToken.js';
 
 export const getData = async (contractToken, query) => {
   try {
+    // Validate token and query
+    const { type, ...queryValidate } = query;
+    console.log({ ...queryValidate, token: contractToken });
+    validateListFieldRequired({ ...queryValidate, token: contractToken });
+    validateListToken({ ...queryValidate, token: contractToken });
+
+    // If valid
     const network = `https://sepolia.infura.io/v3/${envContant.SEPOLIA_RPC_ID}`;
     console.log('Network : ', network);
     const contract = getContract(contractToken, network);
     let result = {};
     switch (query.type) {
       case 'allowance':
-        if (!query.owner || !query.spender) {
-          throw Error('Missing owner or spender address');
-        }
-
         result = {
           allowance: (
             await contract.allowance(query.owner, query.spender)
@@ -20,9 +26,6 @@ export const getData = async (contractToken, query) => {
         };
         break;
       case 'balance':
-        if (!query.account) {
-          throw Error('Missing account address');
-        }
         result = {
           balanceOf: (await contract.balanceOf(query.account)).toString(),
         };
@@ -48,12 +51,12 @@ export const getData = async (contractToken, query) => {
         };
         break;
       default:
-        throw Error('Type is wrong formet');
+        throw new ValidationError('Type is wrong formet');
     }
 
     return result;
   } catch (error) {
     console.log('Error when read contract data : ', error.message);
-    throw Error(error.message);
+    throw error;
   }
 };

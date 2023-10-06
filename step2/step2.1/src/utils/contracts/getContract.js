@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import abiConstant from '../../constants/abi.constant.js';
+import abiConstant from '../../common/constants/abi.constant.js';
 
 // Create Provider instance
 export const getProvider = (network) => {
