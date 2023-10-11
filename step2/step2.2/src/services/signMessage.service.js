@@ -1,6 +1,6 @@
 const ethers = require('ethers');
 
-async function signMessageWithPrivateKey(message, privateKey) {
+const signMessageWithPrivateKey = async (message, privateKey) => {
   const wallet = new ethers.Wallet(privateKey);
 
   const messageBytes = ethers.toUtf8Bytes(message);
@@ -13,6 +13,6 @@ async function signMessageWithPrivateKey(message, privateKey) {
     console.error('Error signing the message:', error.message);
     throw error;
   }
-}
+};
 
-export default signMessageWithPrivateKey;
+module.exports = signMessageWithPrivateKey;

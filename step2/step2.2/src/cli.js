@@ -1,10 +1,5 @@
-import signMessageWithPrivateKey from './signMessage';
-
 const arg = require('arg');
-
-function test(message, privateKey) {
-  return 'Message : ' + message + 'and + ' + privateKey;
-}
+const signMessageWithPrivateKey = require('./services/contracts/signMessage.service');
 
 async function parseArgumentsIntoOptions(rawArgs) {
   const args = arg(
@@ -16,17 +11,17 @@ async function parseArgumentsIntoOptions(rawArgs) {
     },
     {
       argv: rawArgs.slice(2),
-    }
+    },
   );
 
   const signature = await signMessageWithPrivateKey(
     args['--message'],
-    args['--private']
+    args['--private'],
   );
   return signature;
 }
 
-export async function cli(args) {
-  let options = await parseArgumentsIntoOptions(args);
+export const cli = async (args) => {
+  const options = await parseArgumentsIntoOptions(args);
   console.log(options);
-}
+};

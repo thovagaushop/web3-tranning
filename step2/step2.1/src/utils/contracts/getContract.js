@@ -7,14 +7,10 @@ export const getProvider = (network) => {
   return new ethers.JsonRpcProvider(network);
 };
 
-export const getAbi = (contractToken) => {
-  return abiConstant[contractToken];
+export const getAbi = () => {
+  return abiConstant.itsAbi;
 };
 // Create contract instance
 export const getContract = (contractToken, network) => {
-  return new ethers.Contract(
-    contractToken,
-    getAbi(contractToken),
-    getProvider(network),
-  );
+  return new ethers.Contract(contractToken, getAbi(), getProvider(network));
 };

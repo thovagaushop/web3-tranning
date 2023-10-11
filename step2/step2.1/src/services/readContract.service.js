@@ -1,62 +1,109 @@
 import { getContract } from '../utils/contracts/getContract.js';
 import envContant from '../common/constants/env.constant.js';
-import { ValidationError } from '../common/exceptions/custom.exception.js';
-import validateListFieldRequired from '../utils/validation/validateFieldRequired.js';
 import validateListToken from '../utils/validation/validateToken.js';
 
-export const getData = async (contractToken, query) => {
+export const allowance = async (contractToken, owner, spender) => {
   try {
-    // Validate token and query
-    const { type, ...queryValidate } = query;
-    console.log({ ...queryValidate, token: contractToken });
-    validateListFieldRequired({ ...queryValidate, token: contractToken });
-    validateListToken({ ...queryValidate, token: contractToken });
+    // Validate token format
+    validateListToken({ contractToken, owner, spender });
 
     // If valid
     const network = `https://sepolia.infura.io/v3/${envContant.SEPOLIA_RPC_ID}`;
-    console.log('Network : ', network);
     const contract = getContract(contractToken, network);
-    let result = {};
-    switch (query.type) {
-      case 'allowance':
-        result = {
-          allowance: (
-            await contract.allowance(query.owner, query.spender)
-          ).toString(),
-        };
-        break;
-      case 'balance':
-        result = {
-          balanceOf: (await contract.balanceOf(query.account)).toString(),
-        };
-        break;
-      case 'decimals':
-        result = {
-          decimals: (await contract.decimals()).toString(),
-        };
-        break;
-      case 'name':
-        result = {
-          name: await contract.name(),
-        };
-        break;
-      case 'symbol':
-        result = {
-          symbol: await contract.symbol(),
-        };
-        break;
-      case 'totalSupply':
-        result = {
-          totalSupply: (await contract.totalSupply()).toString(),
-        };
-        break;
-      default:
-        throw new ValidationError('Type is wrong formet');
-    }
 
-    return result;
+    return {
+      allowance: (await contract.allowance(owner, spender)).toString(),
+    };
   } catch (error) {
-    console.log('Error when read contract data : ', error.message);
+    console.log('Error when read allowance : ', error.message);
+    throw error;
+  }
+};
+
+export const balance = async (contractToken, account) => {
+  try {
+    // Validate token format
+    validateListToken({ contractToken, account });
+
+    // If valid
+    const network = `https://sepolia.infura.io/v3/${envContant.SEPOLIA_RPC_ID}`;
+    const contract = getContract(contractToken, network);
+
+    return {
+      balanceOf: (await contract.balanceOf(account)).toString(),
+    };
+  } catch (error) {
+    console.log('Error when read balance : ', error.message);
+    throw error;
+  }
+};
+
+export const decimals = async (contractToken) => {
+  try {
+    // Validate token format
+    validateListToken({ contractToken });
+
+    // If valid
+    const network = `https://sepolia.infura.io/v3/${envContant.SEPOLIA_RPC_ID}`;
+    const contract = getContract(contractToken, network);
+    return {
+      decimals: (await contract.decimals()).toString(),
+    };
+  } catch (error) {
+    console.log('Error when read decimals : ', error.message);
+    throw error;
+  }
+};
+
+export const name = async (contractToken) => {
+  try {
+    // Validate token format
+    validateListToken({ contractToken });
+
+    // If valid
+    const network = `https://sepolia.infura.io/v3/${envContant.SEPOLIA_RPC_ID}`;
+    const contract = getContract(contractToken, network);
+
+    return {
+      name: await contract.name(),
+    };
+  } catch (error) {
+    console.log('Error when read name : ', error.message);
+    throw error;
+  }
+};
+
+export const symbol = async (contractToken) => {
+  try {
+    // Validate token format
+    validateListToken({ contractToken });
+
+    // If valid
+    const network = `https://sepolia.infura.io/v3/${envContant.SEPOLIA_RPC_ID}`;
+    const contract = getContract(contractToken, network);
+
+    return {
+      symbol: await contract.symbol(),
+    };
+  } catch (error) {
+    console.log('Error when read symbol : ', error.message);
+    throw error;
+  }
+};
+
+export const totalSupply = async (contractToken) => {
+  try {
+    // Validate token format
+    validateListToken({ contractToken });
+
+    // If valid
+    const network = `https://sepolia.infura.io/v3/${envContant.SEPOLIA_RPC_ID}`;
+    const contract = getContract(contractToken, network);
+    return {
+      totalSupply: (await contract.totalSupply()).toString(),
+    };
+  } catch (error) {
+    console.log('Error when read totalSupply : ', error.message);
     throw error;
   }
 };
