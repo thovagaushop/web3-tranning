@@ -17,10 +17,9 @@ const validateListFieldRequired = (data) => {
     }
   }
   console.log(listAttribute);
-  if (!messages.length) return true;
-  else {
-    throw new ValidationError(messages.join('\n'));
-  }
+
+  if (messages.length > 0) throw new ValidationError(messages.join('\n'));
+  return true;
 };
 
 export default validateListFieldRequired;

@@ -5,7 +5,8 @@ import MessageConstant from '../../common/constants/message.constant.js';
 const validateToken = (token) => {
   try {
     const result = ethers.getAddress(token);
-    if (result) return true;
+    if (!result) return false;
+    return true;
   } catch (error) {
     return false;
   }
@@ -22,8 +23,9 @@ const validateListToken = (data) => {
     }
   }
 
-  if (!messages.length) return true;
-  else throw new ValidationError(messages.join('\n'));
+  if (messages.length > 0) throw new ValidationError(messages.join('\n'));
+
+  return true;
 };
 
 export default validateListToken;
