@@ -1,5 +1,4 @@
 import { getContract } from '../utils/contracts/getContract.js';
-import envContant from '../common/constants/env.constant.js';
 import validateListToken from '../utils/validation/validateToken.js';
 
 export const allowance = async (contractToken, owner, spender) => {
@@ -7,9 +6,8 @@ export const allowance = async (contractToken, owner, spender) => {
     // Validate token format
     validateListToken({ contractToken, owner, spender });
 
-    // If valid
-    const network = `https://sepolia.infura.io/v3/${envContant.SEPOLIA_RPC_ID}`;
-    const contract = getContract(contractToken, network);
+    // If valid;
+    const contract = getContract(contractToken);
 
     return {
       allowance: (await contract.allowance(owner, spender)).toString(),
@@ -25,9 +23,8 @@ export const balance = async (contractToken, account) => {
     // Validate token format
     validateListToken({ contractToken, account });
 
-    // If valid
-    const network = `https://sepolia.infura.io/v3/${envContant.SEPOLIA_RPC_ID}`;
-    const contract = getContract(contractToken, network);
+    // If valid;
+    const contract = getContract(contractToken);
 
     return {
       balanceOf: (await contract.balanceOf(account)).toString(),
@@ -43,9 +40,8 @@ export const decimals = async (contractToken) => {
     // Validate token format
     validateListToken({ contractToken });
 
-    // If valid
-    const network = `https://sepolia.infura.io/v3/${envContant.SEPOLIA_RPC_ID}`;
-    const contract = getContract(contractToken, network);
+    // If valid;
+    const contract = getContract(contractToken);
     return {
       decimals: (await contract.decimals()).toString(),
     };
@@ -60,9 +56,8 @@ export const name = async (contractToken) => {
     // Validate token format
     validateListToken({ contractToken });
 
-    // If valid
-    const network = `https://sepolia.infura.io/v3/${envContant.SEPOLIA_RPC_ID}`;
-    const contract = getContract(contractToken, network);
+    // If valid;
+    const contract = getContract(contractToken);
 
     return {
       name: await contract.name(),
@@ -78,9 +73,8 @@ export const symbol = async (contractToken) => {
     // Validate token format
     validateListToken({ contractToken });
 
-    // If valid
-    const network = `https://sepolia.infura.io/v3/${envContant.SEPOLIA_RPC_ID}`;
-    const contract = getContract(contractToken, network);
+    // If valid;
+    const contract = getContract(contractToken);
 
     return {
       symbol: await contract.symbol(),
@@ -96,9 +90,8 @@ export const totalSupply = async (contractToken) => {
     // Validate token format
     validateListToken({ contractToken });
 
-    // If valid
-    const network = `https://sepolia.infura.io/v3/${envContant.SEPOLIA_RPC_ID}`;
-    const contract = getContract(contractToken, network);
+    // If valid;
+    const contract = getContract(contractToken);
     return {
       totalSupply: (await contract.totalSupply()).toString(),
     };

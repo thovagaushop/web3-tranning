@@ -14,16 +14,20 @@ const stakeTokenService = async () => {
     provider,
   );
 
-  console.log(signer);
-  const contract = new ethers.Contract(
-    '0xebE5F4ED7ceD336A82aA107c27346CFCC5385fd7',
-    getAib(),
-    signer,
+  console.log(
+    await provider.getBalance('0x270dcE2c7d0F7Eb4bf5Fd305C70a0757b7C6D3e9'),
   );
 
-  const result = await contract.stakeERC20(ethers.parseEther('0.05'));
+  console.log(ethers.parseEther('0.5'));
+  //   const contract = new ethers.Contract(
+  //     '0xebE5F4ED7ceD336A82aA107c27346CFCC5385fd7',
+  //     getAib(),
+  //     signer,
+  //   );
 
-  console.log(result);
+  //   const result = await contract.stakeERC20(ethers.parseEther('0.01'));
+
+  //   console.log(result);
 };
 
 stakeTokenService();
