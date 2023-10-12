@@ -1,27 +1,42 @@
-const arg = require('arg');
-const signMessageWithPrivateKey = require('./services/signMessage.service');
-
-const parseArgumentsIntoOptions = async (rawArgs) => {
-  const args = arg(
-    {
-      '--message': String,
-      '--private': String,
-      '-m': '--message',
-      '-pk': '--private',
-    },
-    {
-      argv: rawArgs.slice(2),
-    },
-  );
-
-  const signature = await signMessageWithPrivateKey(
-    args['--message'],
-    args['--private'],
-  );
-  return signature;
+import inquirer from 'inquirer';
+import validatePrivateKey from '../common/validations/validatePrivateKey.js';
+import MessageConstant from '../common/constants/message.constant.js';
+import signMessageWithPrivateKey from '../services/signMessage.service.js';
+// Validate message
+const validateMissingMessage = (value) => {
+  if (!value || !value.trim()) {
+    return MessageConstant.MISSING_FIELD + ' message';
+  }
+  return true;
 };
 
-export const cli = async (args) => {
-  const options = await parseArgumentsIntoOptions(args);
-  console.log(options);
+export const inputParameter = async (options) => {
+  const questions = [];
+
+  // Input PrivateKey of wallet
+  questions.push({
+    type: 'password',
+    name: 'privateKey',
+    message: 'Input your PrivateKey : ',
+    mask: true,
+    validate: validatePrivateKey,
+  });
+
+  // Input Message
+  questions.push({
+    type: 'input',
+    name: 'message',
+    message: 'Input your Message to sign : ',
+    validate: validateMissingMessage,
+  });
+
+  const answers = await inquirer.prompt(questions);
+  console.log('Answer', answers);
+
+  // Sign a message
+  const signature = await signMessageWithPrivateKey(
+    answers.message,
+    answers.privateKey,
+  );
+  return signature;
 };

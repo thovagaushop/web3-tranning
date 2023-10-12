@@ -1,18 +1,24 @@
-const ethers = require('ethers');
+import { ethers } from 'ethers';
+import MessageConstant from '../common/constants/message.constant.js';
 
 const signMessageWithPrivateKey = async (message, privateKey) => {
-  const wallet = new ethers.Wallet(privateKey);
-
-  const messageBytes = ethers.toUtf8Bytes(message);
-  const messageHash = ethers.keccak256(messageBytes);
-
   try {
+    const wallet = new ethers.Wallet(privateKey);
+
+    const messageBytes = ethers.toUtf8Bytes(message);
+    const messageHash = ethers.keccak256(messageBytes);
     const signature = await wallet.signMessage(messageHash);
-    return signature;
+    return {
+      status: 'success',
+      signature,
+    };
   } catch (error) {
     console.error('Error signing the message:', error.message);
-    throw error;
+    return {
+      status: 'error',
+      message: MessageConstant.BAD_REQUEST,
+    };
   }
 };
 
-module.exports = signMessageWithPrivateKey;
+export default signMessageWithPrivateKey;

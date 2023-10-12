@@ -2,8 +2,9 @@
   "name": "step2.2",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "bin": {
-    "test": "./bin/index"
+    "test": "./bin/index.js"
   },
   "publishConfig": {
     "access": "public"
@@ -14,8 +15,7 @@
   },
   "preferGlobal": true,
   "keywords": [
-    "cli",
-    "test"
+    "cli"
   ],
   "license": "MIT",
   "dependencies": {

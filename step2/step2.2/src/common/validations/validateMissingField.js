@@ -1,6 +1,5 @@
-const { ValidationError } = require('../exeptions/index');
-
-const validateMissingField = (value) => {
+import { ValidationError } from '../exeptions/index.js';
+export const validateMissingField = (value) => {
   if (!value) {
     return false;
   }
@@ -26,4 +25,4 @@ const validateListMissingField = (objectField) => {
   }
 };
 
-module.exports = validateListMissingField;
+export default validateListMissingField;
