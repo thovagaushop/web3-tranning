@@ -1,4 +1,5 @@
 import { ValidationError } from '../exeptions/index.js';
+
 export const validateMissingField = (value) => {
   if (!value) {
     return false;
@@ -6,7 +7,7 @@ export const validateMissingField = (value) => {
   return true;
 };
 
-const validateListMissingField = (objectField) => {
+export const validateListMissingField = (objectField) => {
   const listAttribute = Object.keys(objectField);
 
   // Message to show if invalid
@@ -24,5 +25,3 @@ const validateListMissingField = (objectField) => {
     return true;
   }
 };
-
-export default validateListMissingField;

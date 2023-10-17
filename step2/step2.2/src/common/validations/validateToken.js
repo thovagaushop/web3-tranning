@@ -1,7 +1,7 @@
-const ethers = require('ethers');
-const { ValidationError } = require('../exeptions/index');
+import { ethers } from 'ethers';
+import { ValidationError } from '../exeptions/index.js';
 
-const validateToken = (token) => {
+export const validateToken = (token) => {
   try {
     const address = ethers.getAddress(token);
     if (address) {
@@ -13,7 +13,7 @@ const validateToken = (token) => {
   }
 };
 
-const validateListToken = (objectToken) => {
+export const validateListToken = (objectToken) => {
   const listAttribute = Object.keys(objectToken);
 
   // Message to show if invalid
@@ -31,5 +31,3 @@ const validateListToken = (objectToken) => {
     return true;
   }
 };
-
-module.exports = validateListToken;

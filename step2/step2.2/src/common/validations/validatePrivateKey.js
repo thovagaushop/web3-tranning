@@ -1,18 +1,20 @@
 import { ethers } from 'ethers';
 import MessageConstant from '../constants/message.constant.js';
-const validatePrivateKey = (privateKey) => {
+import { InvalidPrivateKeyError } from '../exeptions/index.js';
+
+export const validatePrivateKey = (privateKey) => {
   try {
     if (!privateKey || !privateKey.trim()) {
-      return `${MessageConstant.MISSING_FIELD} private key`;
+      throw new InvalidPrivateKeyError(
+        `${MessageConstant.MISSING_FIELD} private key`,
+      );
     }
     const wallet = new ethers.Wallet(privateKey);
-    if (wallet) {
-      return true;
+    if (!wallet) {
+      throw new InvalidPrivateKeyError(MessageConstant.INVALID_PRIVATE_KEY);
     }
-    return MessageConstant.INVALID_PRIVATE_KEY;
+    return true;
   } catch (error) {
-    return MessageConstant.INVALID_PRIVATE_KEY;
+    throw new InvalidPrivateKeyError(MessageConstant.INVALID_PRIVATE_KEY);
   }
 };
-
-export default validatePrivateKey;
